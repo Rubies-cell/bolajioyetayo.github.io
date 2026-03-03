@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Bolaji O. Oyetayo | Neuroscience & Toxicology</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b27;
+    --surface2: #1e2638;
+    --accent: #c8a96e;
+    --accent2: #5b9bd5;
+    --text: #e8eaf0;
+    --muted: #8892a4;
+    --border: #2a3347;
+    --nav-h: 64px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    height: var(--nav-h);
+    background: rgba(13,17,23,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center;
+    padding: 0 2rem;
+    gap: 2rem;
+  }
+  .nav-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--accent);
+    text-decoration: none;
+    margin-right: auto;
+    letter-spacing: 0.02em;
+  }
+  nav a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    padding: 4px 0;
+    border-bottom: 1px solid transparent;
+  }
+  nav a:hover, nav a.active {
+    color: var(--text);
+    border-bottom-color: var(--accent);
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    min-height: 100vh;
+    padding: calc(var(--nav-h) + 5rem) 0 5rem;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1; max-width: 60px;
+    height: 1px; background: var(--accent); opacity: 0.4;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    line-height: 1.15;
+    font-weight: 600;
+    margin-bottom: 1.4rem;
+  }
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+  p { color: #b0bac8; margin-bottom: 1rem; }
+
+  /* ── ABOUT ── */
+  #about {
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+  }
+  #about::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,169,110,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 4rem;
+    align-items: start;
+  }
+  .about-bio p { max-width: 560px; }
+  .about-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.5rem 0; }
+  .tag {
+    font-size: 0.75rem;
+    font-family: 'DM Mono', monospace;
+    padding: 3px 10px;
+    border-radius: 2px;
+    background: var(--surface2);
+    color: var(--accent2);
+    border: 1px solid rgba(91,155,213,0.2);
+  }
+  .about-links { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1.5rem; }
+  .about-links a {
+    font-size: 0.82rem;
+    color: var(--muted);
+    text-decoration: none;
+    display: flex; align-items: center; gap: 0.5rem;
+    transition: color 0.2s;
+  }
+  .about-links a:hover { color: var(--accent); }
+  .about-links a::before { content: '→'; color: var(--accent); font-size: 0.8rem; }
+  .stat-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.8rem;
+    display: flex; flex-direction: column; gap: 1.4rem;
+  }
+  .stat-item {}
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .stat-desc {
+    font-size: 0.78rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin-top: 0.2rem;
+  }
+  .stat-divider { height: 1px; background: var(--border); }
+
+  /* ── RESEARCH CARDS ── */
+  #research { background: var(--surface); }
+  .research-intro { max-width: 620px; margin-bottom: 3rem; }
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.2rem;
+  }
+  .card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+    display: block;
+    cursor: default;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(200,169,110,0.35);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  }
+  .card-thumb {
+    width: 100%; height: 160px;
+    object-fit: cover;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3rem;
+  }
+  .card-body { padding: 1.2rem 1.4rem 1.4rem; }
+  .card-body h3 { font-size: 1rem; margin-bottom: 0.4rem; }
+  .card-body p { font-size: 0.83rem; color: var(--muted); margin: 0; line-height: 1.5; }
+
+  /* ── PUBLICATIONS ── */
+  #publications { background: var(--bg); }
+  .pub-list { display: flex; flex-direction: column; gap: 0; }
+  .pub-item {
+    padding: 1.6rem 0;
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.4rem;
+    align-items: start;
+  }
+  .pub-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    padding-top: 3px;
+    min-width: 20px;
+  }
+  .pub-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    line-height: 1.4;
+    color: var(--text);
+    margin-bottom: 0.35rem;
+    font-weight: 400;
+  }
+  .pub-authors { font-size: 0.8rem; color: var(--muted); margin-bottom: 0.25rem; }
+  .pub-authors strong { color: #c8d4e8; }
+  .pub-journal {
+    font-size: 0.78rem;
+    color: var(--accent2);
+    font-style: italic;
+  }
+  .pub-year {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    background: rgba(91,155,213,0.1);
+    color: var(--accent2);
+    border: 1px solid rgba(91,155,213,0.2);
+    padding: 1px 6px;
+    border-radius: 2px;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+    font-style: normal;
+  }
+  .chapter-badge {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    background: rgba(200,169,110,0.1);
+    color: var(--accent);
+    border: 1px solid rgba(200,169,110,0.25);
+    padding: 1px 7px;
+    border-radius: 2px;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+  }
+  .scholar-link {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    margin-top: 2rem;
+    font-size: 0.83rem;
+    color: var(--accent2);
+    text-decoration: none;
+    border: 1px solid rgba(91,155,213,0.3);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background 0.2s, color 0.2s;
+  }
+  .scholar-link:hover { background: rgba(91,155,213,0.08); }
+
+  /* ── CV ── */
+  #cv { background: var(--surface); }
+  .cv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+  .cv-section { margin-bottom: 2.4rem; }
+  .cv-section-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .cv-entry { margin-bottom: 1.2rem; }
+  .cv-entry-title { font-size: 0.9rem; font-weight: 500; color: var(--text); }
+  .cv-entry-sub { font-size: 0.8rem; color: var(--muted); margin-top: 0.1rem; }
+  .cv-entry-year {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+  }
+  .skill-chip {
+    display: inline-block;
+    font-size: 0.74rem;
+    padding: 3px 10px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    color: var(--muted);
+    margin: 2px;
+  }
+  .skill-chips { margin-top: 0.6rem; }
+  .award-item { display: flex; align-items: start; gap: 0.8rem; margin-bottom: 0.9rem; }
+  .award-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-top: 7px; flex-shrink: 0;
+  }
+  .award-text { font-size: 0.85rem; color: #b0bac8; }
+  .award-text strong { color: var(--text); display: block; font-weight: 500; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    padding: 2.5rem;
+    text-align: center;
+  }
+  footer p { color: var(--muted); font-size: 0.8rem; margin: 0; }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  /* ── ANIMATIONS ── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 700px) {
+    .about-grid { grid-template-columns: 1fr; }
+    .cv-grid { grid-template-columns: 1fr; gap: 0; }
+    .stat-box { flex-direction: row; flex-wrap: wrap; }
+  }
+
+  /* card gradient thumbs */
+  .thumb-epi { background: linear-gradient(135deg, #1a2744 0%, #0f3460 50%, #1a2744 100%); }
+  .thumb-glia { background: linear-gradient(135deg, #1f3a1f 0%, #0d4a2e 50%, #1f3a1f 100%); }
+  .thumb-neuro { background: linear-gradient(135deg, #3a1f1f 0%, #4a1a0d 50%, #3a1f1f 100%); }
+  .thumb-comp { background: linear-gradient(135deg, #1f1f3a 0%, #0d1a4a 50%, #1f1f3a 100%); }
+  .thumb-drug { background: linear-gradient(135deg, #2d1f3a 0%, #1a0d4a 50%, #2d1f3a 100%); }
+  .thumb-circ { background: linear-gradient(135deg, #1f2d3a 0%, #0d284a 50%, #1f2d3a 100%); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="#about">Bolaji O. Oyetayo</a>
+  <a href="#about" class="active" onclick="setActive(this)">About</a>
+  <a href="#research" onclick="setActive(this)">Research</a>
+  <a href="#publications" onclick="setActive(this)">Publications</a>
+  <a href="#cv" onclick="setActive(this)">CV</a>
+</nav>
+
+<!-- ══════════ ABOUT ══════════ -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-bio fade-in">
+        <div class="section-label">About</div>
+        <h1>Glial Biology,<br/><em>Epigenetics &</em><br/>Neurotoxicology</h1>
+        <p>
+          I am a postdoctoral researcher with a Ph.D. in Toxicology from <strong style="color:var(--text)">CINVESTAV-IPN</strong>, Mexico City. My work sits at the intersection of glial cell biology, epigenetic regulation, and computational approaches to understanding neurodegeneration.
+        </p>
+        <p>
+          My doctoral research uncovered how glutamate receptor signaling dynamically controls DNA methylation to regulate glutamate transporter expression in Bergmann and Müller glia — findings with implications for excitotoxicity and neurodegeneration.
+        </p>
+        <div class="about-tags">
+          <span class="tag">Epigenetics</span>
+          <span class="tag">Glutamate Transport</span>
+          <span class="tag">Glial Biology</span>
+          <span class="tag">DNA Methylation</span>
+          <span class="tag">Computational Biology</span>
+          <span class="tag">Neurotoxicology</span>
+        </div>
+        <div class="about-links">
+          <a href="mailto:bolajioyetayo709@gmail.com">bolajioyetayo709@gmail.com</a>
+          <a href="https://orcid.org/0000-0002-2406-782X" target="_blank">ORCID: 0000-0002-2406-782X</a>
+          <a href="https://scholar.google.com/citations?user=qVwR9RIAAAAJ&hl=en" target="_blank">Google Scholar</a>
+          <a href="#publications">Publications</a>
+          <a href="#cv">Curriculum Vitae</a>
+        </div>
+      </div>
+
+      <div class="stat-box fade-in" style="transition-delay:0.2s">
+        <div class="stat-item">
+          <div class="stat-number">3+</div>
+          <div class="stat-desc">Peer-reviewed publications</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <div class="stat-number">4</div>
+          <div class="stat-desc">Conference presentations</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <div class="stat-number">2026</div>
+          <div class="stat-desc">ASN Neuro Trainee Award</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <div class="stat-number">CINVESTAV</div>
+          <div class="stat-desc">Ph.D., Toxicology · Dec 2025</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ RESEARCH ══════════ -->
+<section id="research">
+  <div class="container">
+    <div class="section-label">Research</div>
+    <h2>Research Areas</h2>
+    <p class="research-intro" style="color:var(--muted)">
+      My research integrates wet-lab and computational approaches to understand how glial cells regulate excitatory neurotransmission through epigenetic mechanisms — and how these processes break down in neurodegeneration.
+    </p>
+
+    <div class="cards-grid">
+
+      <div class="card fade-in">
+        <div class="card-thumb thumb-epi" style="font-size:2.6rem; display:flex; align-items:center; justify-content:center;">🧬</div>
+        <div class="card-body">
+          <h3>Epigenetic Regulation</h3>
+          <p>Dynamic DNA methylation control of glutamate transporter genes (SLC1A2, SLC1A3) in glial cells via AMPA receptor signaling cascades.</p>
+        </div>
+      </div>
+
+      <div class="card fade-in" style="transition-delay:0.1s">
+        <div class="card-thumb thumb-glia" style="font-size:2.6rem; display:flex; align-items:center; justify-content:center;">🔬</div>
+        <div class="card-body">
+          <h3>Glial Cell Biology</h3>
+          <p>Functional studies of Bergmann and Müller glia — key support cells for Purkinje and retinal neurons — in glutamate homeostasis.</p>
+        </div>
+      </div>
+
+      <div class="card fade-in" style="transition-delay:0.15s">
+        <div class="card-thumb thumb-neuro" style="font-size:2.6rem; display:flex; align-items:center; justify-content:center;">⚗️</div>
+        <div class="card-body">
+          <h3>Neurotoxicology</h3>
+          <p>Oxidative stress and mitochondrial dysfunction in metal-induced neurotoxicity modeled in <em>Drosophila melanogaster</em>; curcumin as a neuroprotective agent.</p>
+        </div>
+      </div>
+
+      <div class="card fade-in" style="transition-delay:0.2s">
+        <div class="card-thumb thumb-comp" style="font-size:2.6rem; display:flex; align-items:center; justify-content:center;">💻</div>
+        <div class="card-body">
+          <h3>Bioinformatics</h3>
+          <p>ENCODE ChIP-seq mining, CpG island profiling, histone modification mapping, and genome browser analysis with Bioconductor and Python pipelines.</p>
+        </div>
+      </div>
+
+      <div class="card fade-in" style="transition-delay:0.25s">
+        <div class="card-thumb thumb-drug" style="font-size:2.6rem; display:flex; align-items:center; justify-content:center;">💊</div>
+        <div class="card-body">
+          <h3>Computational Drug Discovery</h3>
+          <p>Structure-based drug design, molecular docking (AutoDock/Vina), virtual screening, and AlphaFold structure prediction and refinement.</p>
+        </div>
+      </div>
+
+      <div class="card fade-in" style="transition-delay:0.3s">
+        <div class="card-thumb thumb-circ" style="font-size:2.6rem; display:flex; align-items:center; justify-content:center;">🕐</div>
+        <div class="card-body">
+          <h3>Circadian Neuroscience</h3>
+          <p>Circadian modulation of glutamate uptake activity in retinal Müller cells; collaboration with Prof. Felder-Schmittbuhl (INCI Strasbourg).</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PUBLICATIONS ══════════ -->
+<section id="publications">
+  <div class="container">
+    <div class="section-label">Publications</div>
+    <h2>Selected Publications</h2>
+
+    <div class="pub-list">
+
+      <div class="pub-item fade-in">
+        <div class="pub-num">1</div>
+        <div>
+          <div class="pub-title">Glutamate-Dependent Dynamic DNA Methylation Regulates Excitatory Amino Acid Transporters in Bergmann Glia Cells: Role of AMPA Receptors</div>
+          <div class="pub-authors"><strong>Oyetayo, B.O.</strong>, Subair, T., Morales-Ramírez, N., Hernández-Kelly, L.C., Rodríguez-Campuzano, A.G., Calderón, E.S., Castelán, F., Felder-Schmittbuhl, M.-P., Ortega, A.</div>
+          <div class="pub-journal">ASN Neuro <span class="pub-year">2025</span></div>
+        </div>
+      </div>
+
+      <div class="pub-item fade-in" style="transition-delay:0.05s">
+        <div class="pub-num">2</div>
+        <div>
+          <div class="pub-title">Glutamate Uptake Activity in Retina Müller Cells: Circadian Modulation</div>
+          <div class="pub-authors">Subair, T.I., <strong>Oyetayo, B.</strong>, Hernández-Kelly, L.C., Calderón, E.S., Ortega, A.</div>
+          <div class="pub-journal">Experimental Eye Research <span class="pub-year">2025</span></div>
+        </div>
+      </div>
+
+      <div class="pub-item fade-in" style="transition-delay:0.1s">
+        <div class="pub-num">3</div>
+        <div>
+          <div class="pub-title">Ameliorative Role of Diet Fortified with Curcumin in a Drosophila melanogaster Model of Aluminium Chloride-induced Neurotoxicity</div>
+          <div class="pub-authors"><strong>Oyetayo, B.O.</strong>, Abolaji, A.O., Fasae, K.D., Aderibigbe, A.O.</div>
+          <div class="pub-journal">Journal of Functional Foods, 71 <span class="pub-year">2020</span></div>
+        </div>
+      </div>
+
+      <div class="pub-item fade-in" style="transition-delay:0.15s">
+        <div class="pub-num">R</div>
+        <div>
+          <div class="pub-title">Glutamate Receptor Signaling in Retina Müller Cells: Plausible Role in Neurodegeneration <span class="chapter-badge">Review</span></div>
+          <div class="pub-authors"><strong>Oyetayo, B.</strong>, Mendoza-Silva, Y., Subair, T., Hernández-Kelly, L.C., Felder-Schmittbuhl, M.-P., Olivares-Bañuelos, T.N., Ortega, A.</div>
+          <div class="pub-journal">Receptors <span class="pub-year">2025</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <a class="scholar-link" href="https://scholar.google.com/citations?user=qVwR9RIAAAAJ&hl=en" target="_blank">
+      ↗ Full publication list on Google Scholar
+    </a>
+  </div>
+</section>
+
+<!-- ══════════ CV ══════════ -->
+<section id="cv">
+  <div class="container">
+    <div class="section-label">Curriculum Vitae</div>
+    <h2>Background</h2>
+
+    <div class="cv-grid">
+      <div>
+        <div class="cv-section fade-in">
+          <div class="cv-section-title">Education</div>
+          <div class="cv-entry">
+            <div class="cv-entry-year">2021–2025</div>
+            <div class="cv-entry-title">Ph.D. in Toxicology</div>
+            <div class="cv-entry-sub">CINVESTAV-IPN, Mexico City<br/>Advisor: Prof. Arturo Ortega</div>
+          </div>
+          <div class="cv-entry">
+            <div class="cv-entry-year">2019</div>
+            <div class="cv-entry-title">M.Sc. in Neuropharmacology</div>
+            <div class="cv-entry-sub">University of Ibadan, Nigeria</div>
+          </div>
+          <div class="cv-entry">
+            <div class="cv-entry-year">2015</div>
+            <div class="cv-entry-title">B.Sc. in Biochemistry (Honors)</div>
+            <div class="cv-entry-sub">Adeleke University, Nigeria</div>
+          </div>
+        </div>
+
+        <div class="cv-section fade-in" style="transition-delay:0.1s">
+          <div class="cv-section-title">Awards & Fellowships</div>
+          <div class="award-item">
+            <div class="award-dot"></div>
+            <div class="award-text"><strong>ASN Neuro Trainee Research Award</strong> 2026</div>
+          </div>
+          <div class="award-item">
+            <div class="award-dot"></div>
+            <div class="award-text"><strong>CINVESTAV Extraordinario Support</strong> 2025</div>
+          </div>
+          <div class="award-item">
+            <div class="award-dot"></div>
+            <div class="award-text"><strong>CONAHCYT Doctoral Scholarship</strong> 2021–2025</div>
+          </div>
+          <div class="award-item">
+            <div class="award-dot"></div>
+            <div class="award-text"><strong>ISN-APSN Travel Award</strong> 2022</div>
+          </div>
+          <div class="award-item">
+            <div class="award-dot"></div>
+            <div class="award-text"><strong>Thomas Bassir Biomedical Foundation Seed Grant</strong> 2018</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="cv-section fade-in" style="transition-delay:0.15s">
+          <div class="cv-section-title">Technical Skills</div>
+          <p style="font-size:0.78rem; color:var(--muted); margin-bottom:0.5rem;">Experimental</p>
+          <div class="skill-chips">
+            <span class="skill-chip">Cell culture</span>
+            <span class="skill-chip">qPCR</span>
+            <span class="skill-chip">Western blot</span>
+            <span class="skill-chip">ELISA</span>
+            <span class="skill-chip">Immunoprecipitation</span>
+            <span class="skill-chip">Fluorescence microscopy</span>
+            <span class="skill-chip">Radioligand assays</span>
+            <span class="skill-chip">Rodent handling</span>
+            <span class="skill-chip">Drosophila handling</span>
+          </div>
+          <p style="font-size:0.78rem; color:var(--muted); margin:1rem 0 0.5rem;">Computational</p>
+          <div class="skill-chips">
+            <span class="skill-chip">AutoDock / Vina</span>
+            <span class="skill-chip">AlphaFold</span>
+            <span class="skill-chip">SBDD</span>
+            <span class="skill-chip">ChIP-seq (ENCODE)</span>
+            <span class="skill-chip">CpG Island Profiling</span>
+            <span class="skill-chip">Bioconductor</span>
+            <span class="skill-chip">UCSC Genome Browser</span>
+            <span class="skill-chip">IGV</span>
+            <span class="skill-chip">Python</span>
+          </div>
+          <p style="font-size:0.78rem; color:var(--muted); margin:1rem 0 0.5rem;">Data Analysis</p>
+          <div class="skill-chips">
+            <span class="skill-chip">GraphPad Prism</span>
+            <span class="skill-chip">ImageJ</span>
+            <span class="skill-chip">SPSS</span>
+            <span class="skill-chip">Excel</span>
+          </div>
+        </div>
+
+        <div class="cv-section fade-in" style="transition-delay:0.2s">
+          <div class="cv-section-title">Professional Memberships</div>
+          <div class="award-item">
+            <div class="award-dot" style="background:var(--accent2)"></div>
+            <div class="award-text"><strong>Society for Neuroscience</strong> 2023–Present</div>
+          </div>
+          <div class="award-item">
+            <div class="award-dot" style="background:var(--accent2)"></div>
+            <div class="award-text"><strong>American Society for Neurochemistry</strong> 2023–Present</div>
+          </div>
+          <div class="award-item">
+            <div class="award-dot" style="background:var(--accent2)"></div>
+            <div class="award-text"><strong>International Society for Neurochemistry</strong> 2019–Present</div>
+          </div>
+          <div class="award-item">
+            <div class="award-dot" style="background:var(--accent2)"></div>
+            <div class="award-text"><strong>International Parkinson and Movement Disorder Society</strong> 2020–Present</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Bolaji O. Oyetayo &nbsp;·&nbsp; CINVESTAV-IPN, Mexico City &nbsp;·&nbsp;
+    <a href="mailto:bolajioyetayo709@gmail.com">bolajioyetayo709@gmail.com</a>
+  </p>
+</footer>
+
+<script>
+  // Intersection Observer for fade-in animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Nav active state on scroll
+  const sections = document.querySelectorAll('section');
+  const navLinks = document.querySelectorAll('nav a:not(.nav-brand)');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  });
+
+  function setActive(el) {
+    navLinks.forEach(a => a.classList.remove('active'));
+    el.classList.add('active');
+  }
+</script>
+</body>
+</html>
